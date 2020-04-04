@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Deckbuilder.Designer
 {
@@ -10,6 +10,6 @@ namespace Deckbuilder.Designer
 
 		public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
-		public string Summary { get; set; }
+		public string Summary { get; set; } = string.Empty;
 	}
 }
