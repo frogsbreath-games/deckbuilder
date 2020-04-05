@@ -33,45 +33,56 @@ namespace Deckbuilder.Designer.Controllers
 				id: 0,
 				name: "Fireball",
 				price: 2,
-				effect: CardActions.GainDamage(3)));
+				effect: Actions.GainDamage(3)));
 
 			ret.Add(Cards.Spell(
 				id: 1,
 				name: "Gain Some Stuff",
 				price: 3,
-				effect: CardActions.Gain(Resources.Damage(2) + Resources.Gold(2))));
+				effect: Actions.Gain(Resources.Damage(2) + Resources.Gold(2))));
 
 			ret.Add(Cards.Spell(
 				id: 2,
 				name: "Warlock",
+				faction: FactionCode.River,
 				price: 3,
-				effect: CardActions.Draw(1).And(CardActions.GainGold(2))));
+				effect: Actions.Draw(1) & Actions.GainGold(2),
+				keywords: new[]
+				{
+					KeywordCode.Soldier,
+					KeywordCode.Wizard
+				}));
 
 			ret.Add(Cards.Hero(
 				id: 3,
 				name: "Greg The Hero",
-				effect: CardActions.Draw(1),
-				abilities: new List<Ability>
+				faction: FactionCode.Mountain,
+				effect: Actions.Draw(1)
+					& Actions.Conditional(
+						@if: Conditions.FactionCount(FactionCode.Mountain, 2),
+						then: Actions.GainDamage(1)),
+				abilities: new []
 				{
 					Abilities.OncePerTurn(
 						pay: Resources.Glory(2),
-						then: CardActions.GainGold(3)),
+						then: Actions.GainGold(3)),
 					Abilities.OncePerTurn(
 						pay: Resources.Glory(10),
-						then: CardActions.Draw(10))
+						then: Actions.DrawUpTo(10))
 				}));
 
 			ret.Add(Cards.Monster(
 				id: 4,
 				name: "Rat",
 				power: 2,
-				bounty: CardActions.GainGlory(1)));
+				bounty: Actions.GainGlory(1),
+				keywords: new[] { KeywordCode.Vermin }));
 
 			ret.Add(Cards.Monster(
 				id: 5,
-				name: "Snake",
+				name: "Viper",
 				power: 3,
-				bounty: CardActions.GainGlory(2)));
+				bounty: Actions.GainGlory(3) & Actions.LoseHealth(1)));
 
 			return ret;
 		}

@@ -12,8 +12,9 @@ namespace Deckbuilder.Core.Models.CardTypes
 			string name,
 			string code,
 			int monsterPower,
-			CardAction bounty)
-			: base(id, name, code)
+			CardAction bounty,
+			IEnumerable<KeywordCode>? keywords = null)
+			: base(id, name, code, null, keywords)
 		{
 			MonsterPower = monsterPower;
 			Bounty = bounty;

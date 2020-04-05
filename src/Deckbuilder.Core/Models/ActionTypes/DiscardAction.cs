@@ -5,9 +5,9 @@ using Deckbuilder.Core.Enums;
 
 namespace Deckbuilder.Core.Models.ActionTypes
 {
-	public class DrawAction : CardAction
+	public class DiscardAction : CardAction
 	{
-		public DrawAction(int count, bool optional = false)
+		public DiscardAction(int count, bool optional = false)
 		{
 			Count = count;
 			Optional = optional;
@@ -17,10 +17,10 @@ namespace Deckbuilder.Core.Models.ActionTypes
 
 		public bool Optional { get; }
 
-		public override ActionType Type => ActionType.Draw;
+		public override ActionType Type => ActionType.Discard;
 
 		public override string Description => Optional
-			? $"Draw up to {Count} card(s)"
-			: $"Draw {Count} card(s)";
+			? $"Discard up to {Count} card(s)"
+			: $"Discard {Count} card(s)";
 	}
 }

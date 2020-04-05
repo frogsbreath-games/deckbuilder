@@ -38,6 +38,8 @@ namespace Deckbuilder.Core.Enums
 		Charm,
 		//Action representing a list of child actions
 		And,
+		//Action with a condition
+		Conditional,
 		//Action representing a choice of child actions
 		Or,
 	}

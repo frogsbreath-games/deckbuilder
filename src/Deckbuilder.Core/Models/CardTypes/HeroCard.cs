@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Deckbuilder.Core.Enums;
 
@@ -11,12 +12,14 @@ namespace Deckbuilder.Core.Models.CardTypes
 			int id,
 			string name,
 			string code,
+			FactionCode faction,
 			CardAction? boardEffect,
-			List<Ability>? boardAbilities)
-			: base(id, name, code)
+			IEnumerable<Ability>? boardAbilities,
+			IEnumerable<KeywordCode>? keywords = null)
+			: base(id, name, code, faction, keywords)
 		{
 			BoardEffect = boardEffect;
-			BoardAbilities = boardAbilities;
+			BoardAbilities = boardAbilities?.ToList();
 		}
 
 		public override CardType Type => CardType.Hero;

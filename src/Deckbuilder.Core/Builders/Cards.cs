@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Deckbuilder.Core.Enums;
 using Deckbuilder.Core.Models;
 using Deckbuilder.Core.Models.CardTypes;
 
@@ -13,7 +14,9 @@ namespace Deckbuilder.Core.Builders
 			string name,
 			int price,
 			CardAction? effect = null,
-			List<Ability>? abilities = null)
+			IEnumerable<Ability>? abilities = null,
+			FactionCode? faction = null,
+			IEnumerable<KeywordCode>? keywords = null)
 		{
 			return new SpellCard(
 				id,
@@ -21,19 +24,23 @@ namespace Deckbuilder.Core.Builders
 				name.Replace(' ', '_').ToLower(),
 				price,
 				effect,
-				abilities);
+				abilities,
+				faction: faction,
+				keywords: keywords);
 		}
 
 		public static HeroCard Hero(
 			int id,
 			string name,
+			FactionCode faction,
 			CardAction? effect = null,
-			List<Ability>? abilities = null)
+			IEnumerable<Ability>? abilities = null)
 		{
 			return new HeroCard(
 				id,
 				name,
 				name.Replace(' ', '_').ToLower(),
+				faction,
 				effect,
 				abilities);
 		}
@@ -42,14 +49,16 @@ namespace Deckbuilder.Core.Builders
 			int id,
 			string name,
 			int power,
-			CardAction bounty)
+			CardAction bounty,
+			IEnumerable<KeywordCode>? keywords = null)
 		{
 			return new MonsterCard(
 				id,
 				name,
 				name.Replace(' ', '_').ToLower(),
 				power,
-				bounty);
+				bounty,
+				keywords);
 		}
 	}
 }

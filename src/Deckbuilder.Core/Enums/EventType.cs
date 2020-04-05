@@ -11,6 +11,8 @@ namespace Deckbuilder.Core.Enums
 		PermanentDestroyed,
 		CardBanished,
 		CardDiscarded,
+		CardCasted,
+		CardDrawn,
 		EnemyDamaged,
 		PlayerHealed,
 

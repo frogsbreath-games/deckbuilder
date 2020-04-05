@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Deckbuilder.Core.Enums;
 
@@ -14,15 +15,17 @@ namespace Deckbuilder.Core.Models.CardTypes
 			int purchasePrice,
 			int defense,
 			CardAction boardEffect,
-			List<Ability>? boardAbilities = null,
-			List<CardUpgrade>? upgrades = null)
-			: base(id, name, code)
+			IEnumerable<Ability>? boardAbilities = null,
+			IEnumerable<CardUpgrade>? upgrades = null,
+			FactionCode? faction = null,
+			IEnumerable<KeywordCode>? keywords = null)
+			: base(id, name, code, faction, keywords)
 		{
 			PurchasePrice = purchasePrice;
 			Defense = defense;
 			BoardEffect = boardEffect;
-			BoardAbilities = boardAbilities ?? new List<Ability>();
-			Upgrades = upgrades ?? new List<CardUpgrade>();
+			BoardAbilities = boardAbilities?.ToList() ?? new List<Ability>();
+			Upgrades = upgrades?.ToList() ?? new List<CardUpgrade>();
 		}
 
 		public override CardType Type => CardType.Outpost;
