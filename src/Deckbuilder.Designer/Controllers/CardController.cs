@@ -24,25 +24,53 @@ namespace Deckbuilder.Designer.Controllers
 			_logger = logger;
 		}
 
+		[HttpGet("{id}")]
+		public Card? GetCardById(int id)
+		{
+			return GetAllCards()
+				.SingleOrDefault(c => c.Id == id);
+		}
+
 		[HttpGet]
-		public IEnumerable<Card> Get()
+		public IEnumerable<Card> Get(
+			FactionCode? faction = null,
+			KeywordCode? keyword = null,
+			CardType? cardType = null)
+		{
+			IEnumerable<Card> ret = GetAllCards();
+
+			if (faction is FactionCode f)
+				ret = ret.Where(c => c.Faction == f);
+
+			if (keyword is KeywordCode kw)
+				ret = ret.Where(c => c.Keywords.Contains(kw));
+
+			if (cardType is CardType ct)
+				ret = ret.Where(c => c.Type == ct);
+
+			return ret;
+		}
+
+		protected List<Card> GetAllCards()
 		{
 			var ret = new List<Card>();
 
+			int id = 0;
+
 			ret.Add(Cards.Spell(
-				id: 0,
+				id: id++,
 				name: "Fireball",
 				price: 2,
 				effect: Actions.GainDamage(3)));
 
 			ret.Add(Cards.Spell(
-				id: 1,
+				id: id++,
 				name: "Gain Some Stuff",
 				price: 3,
 				effect: Actions.Gain(Resources.Damage(2) + Resources.Gold(2))));
 
 			ret.Add(Cards.Spell(
-				id: 2,
+				id: id++,
 				name: "Warlock",
 				faction: FactionCode.River,
 				price: 3,
@@ -54,7 +82,7 @@ namespace Deckbuilder.Designer.Controllers
 				}));
 
 			ret.Add(Cards.Hero(
-				id: 3,
+				id: id++,
 				name: "Greg The Hero",
 				faction: FactionCode.Mountain,
 				effect: Actions.Draw(1)
@@ -72,14 +100,14 @@ namespace Deckbuilder.Designer.Controllers
 				}));
 
 			ret.Add(Cards.Monster(
-				id: 4,
+				id: id++,
 				name: "Rat",
 				power: 2,
 				bounty: Actions.GainGlory(1),
 				keywords: new[] { KeywordCode.Vermin }));
 
 			ret.Add(Cards.Monster(
-				id: 5,
+				id: id++,
 				name: "Viper",
 				power: 3,
 				bounty: Actions.GainGlory(3) & Actions.LoseHealth(1)));

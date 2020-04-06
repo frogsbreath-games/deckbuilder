@@ -19,5 +19,17 @@ namespace Deckbuilder.Core.Builders
 
 		public static KeywordCountCondition KeywordCount(KeywordCode keyword, OperatorCode @operator, int value)
 			=> new KeywordCountCondition(value, @operator, keyword);
+
+		public static CardTypeCountCondition CardTypeCount(CardType cardType, int count)
+			=> CardTypeCount(cardType, OperatorCode.Equals, count);
+
+		public static CardTypeCountCondition CardTypeCount(CardType cardType, OperatorCode @operator, int value)
+			=> new CardTypeCountCondition(value, @operator, cardType);
+
+		public static ResourceCountCondition ResourceCount(ResourceType resource, int count)
+			=> ResourceCount(resource, OperatorCode.Equals, count);
+
+		public static ResourceCountCondition ResourceCount(ResourceType resource, OperatorCode @operator, int value)
+			=> new ResourceCountCondition(value, @operator, resource);
 	}
 }
