@@ -24,7 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\FetchCards.tsx" />
+    <None Remove="ClientApp\src\store\Cards.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Deckbuilder.Core\Deckbuilder.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\FetchCards.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\store\Cards.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

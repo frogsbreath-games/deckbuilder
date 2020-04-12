@@ -74,7 +74,7 @@ namespace Deckbuilder.Designer.Controllers
 				name: "Warlock",
 				faction: FactionCode.River,
 				price: 3,
-				effect: Actions.Draw(1) & Actions.GainGold(2),
+				effect: Actions.GainGold(2) & Actions.Draw(1),
 				keywords: new[]
 				{
 					KeywordCode.Soldier,
@@ -106,11 +106,65 @@ namespace Deckbuilder.Designer.Controllers
 				bounty: Actions.GainGlory(1),
 				keywords: new[] { KeywordCode.Vermin }));
 
+			ret.Add(Cards.Spell(
+				id: id++,
+				name: "Fighter",
+				faction: FactionCode.Sea,
+				price: 2,
+				effect: Actions.GainDamage(1) & Actions.Draw(1),
+				keywords: new[]
+				{
+					KeywordCode.Soldier
+				}));
+
 			ret.Add(Cards.Monster(
 				id: id++,
 				name: "Viper",
 				power: 3,
 				bounty: Actions.GainGlory(3) & Actions.LoseHealth(1)));
+
+			ret.Add(Cards.Spell(
+				id: id++,
+				name: "Coin Purse",
+				faction: FactionCode.Jungle,
+				price: 2,
+				effect: Actions.GainGold(3)));
+
+			ret.Add(Cards.Monster(
+				id: id++,
+				name: "Lucky Dragon",
+				power: 8,
+				bounty: Actions.GainGlory(6) & Actions.Draw(2)));
+
+			ret.Add(Cards.Spell(
+				id: id++,
+				name: "Common Mercenary",
+				price: 2,
+				effect: Actions.GainDamage(1),
+				abilities: new[]
+				{
+					Abilities.OncePerTurn(
+						pay: Resources.Gold(4),
+						then: Actions.GainDamage(3))
+				}));
+
+			ret.Add(Cards.Hero(
+				id: id++,
+				name: "Desert Hero",
+				faction: FactionCode.Desert,
+				effect: Actions.GainDamage(2)
+					& Actions.Conditional(
+						@if: Conditions.FactionCount(FactionCode.Desert, 2),
+						then: Actions.Draw(1)),
+				abilities: new[]
+				{
+					Abilities.OncePerTurn(
+						pay: Resources.Glory(2),
+						then: Actions.GainDamage(3)),
+					Abilities.OncePerTurn(
+						pay: Resources.Glory(10),
+						then: Actions.GainDamage(20))
+				}));
 
 			return ret;
 		}

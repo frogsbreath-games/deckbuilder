@@ -26,6 +26,9 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/fetch-cards">Cards</NavLink>
+                </NavItem>
               </ul>
             </Collapse>
           </Container>

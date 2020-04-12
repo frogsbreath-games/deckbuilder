@@ -28,7 +28,7 @@ namespace Deckbuilder.Designer
 				.AddNewtonsoftJson(options =>
 				{
 					options.SerializerSettings.Converters.Add(
-						new StringEnumConverter(new CamelCaseNamingStrategy(false, true)));
+						new StringEnumConverter(new CamelCaseNamingStrategy(true, true)));
 
 					options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 
