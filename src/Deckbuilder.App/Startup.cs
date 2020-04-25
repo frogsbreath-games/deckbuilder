@@ -1,3 +1,5 @@
+﻿using Deckbuilder.App.Hubs;
+using Deckbuilder.App.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -6,6 +8,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace Deckbuilder.App
 {
@@ -21,13 +26,37 @@ namespace Deckbuilder.App
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllersWithViews();
+			services.AddControllersWithViews()
+				.AddNewtonsoftJson(options =>
+				{
+					options.SerializerSettings.Converters.Add(
+						new StringEnumConverter(new CamelCaseNamingStrategy(true, true)));
+
+					options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+
+					JsonConvert.DefaultSettings = () => options.SerializerSettings;
+				});
+
+			services.AddOpenApiDocument();
 
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
 				configuration.RootPath = "ClientApp/build";
 			});
+
+			services.AddSingleton<BoardSingletonRepo>();
+
+			services.AddScoped<IRandomAccessor, RandomAccessor>();
+			services.AddScoped<IBoardUpdater, BoardUpdater>();
+			services.AddScoped<IBoardGenerator, BoardGenerator>();
+
+			services.AddSignalR()
+				.AddNewtonsoftJsonProtocol(options =>
+				{
+					options.PayloadSerializerSettings.Converters.Add(
+						new StringEnumConverter(new CamelCaseNamingStrategy(false, true)));
+				});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +79,12 @@ namespace Deckbuilder.App
 
 			app.UseRouting();
 
+			app.UseOpenApi();
+			app.UseSwaggerUi3();
+
 			app.UseEndpoints(endpoints =>
 			{
+				endpoints.MapHub<BoardHub>("/hubs/board");
 				endpoints.MapControllerRoute(
 					name: "default",
 					pattern: "{controller}/{action=Index}/{id?}");
