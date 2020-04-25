@@ -37,6 +37,8 @@ namespace Deckbuilder.Designer
 					JsonConvert.DefaultSettings = () => options.SerializerSettings;
 				});
 
+			services.AddOpenApiDocument();
+
 			// In production, the React files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
@@ -63,6 +65,9 @@ namespace Deckbuilder.Designer
 			app.UseSpaStaticFiles();
 
 			app.UseRouting();
+
+			app.UseOpenApi();
+			app.UseSwaggerUi3();
 
 			app.UseEndpoints(endpoints =>
 			{

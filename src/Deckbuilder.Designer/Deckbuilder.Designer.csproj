@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,17 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\components\FetchCards.tsx" />
-    <None Remove="ClientApp\src\store\Cards.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Deckbuilder.Core\Deckbuilder.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\components\FetchCards.tsx" />
-    <TypeScriptCompile Include="ClientApp\src\store\Cards.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

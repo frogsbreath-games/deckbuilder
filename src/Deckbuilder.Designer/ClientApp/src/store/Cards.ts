@@ -230,7 +230,7 @@ export const actionCreators = {
     // Only load data if it's something we don't already have (and are not already loading)
     const appState = getState();
     if (appState && appState.cards && startCardIndex !== appState.cards.startCardIndex) {
-      fetch(`card`)
+      fetch(`api/cards`)
         .then(response => response.json() as Promise<Card[]>)
         .then(data => {
           dispatch({ type: 'RECEIVE_CARDS', startCardIndex: startCardIndex, cards: data });

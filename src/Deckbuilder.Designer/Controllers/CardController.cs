@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 namespace Deckbuilder.Designer.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/cards")]
 	public class CardController : ControllerBase
 	{
 		private readonly ILogger<CardController> _logger;
