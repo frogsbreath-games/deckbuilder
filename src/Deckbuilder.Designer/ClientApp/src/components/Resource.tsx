@@ -21,7 +21,7 @@ export const DamageResource = ({ count }: ResourceProps) =>
 export const HealthResource = ({ count }: ResourceProps) =>
   <span className="resource health">{count}</span>;
 
-const ResourceList = ({ resources }: ResourceListProps) => (
+export const ResourceList = ({ resources }: ResourceListProps) => (
   <React.Fragment>
     {resources.gold && <GoldResource count={resources.gold} />}
     {resources.damage && <DamageResource count={resources.damage} />}

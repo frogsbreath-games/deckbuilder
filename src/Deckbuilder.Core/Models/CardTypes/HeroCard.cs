@@ -16,27 +16,18 @@ namespace Deckbuilder.Core.Models.CardTypes
 			CardAction? boardEffect,
 			IEnumerable<Ability>? boardAbilities,
 			IEnumerable<KeywordCode>? keywords = null)
-			: base(id, name, code, faction, keywords)
+			: base(id, name, code, faction, keywords,
+				  store: null,
+				  board: new BoardCardMeta(
+					  effect: boardEffect,
+					  abilities: boardAbilities,
+					  permanent: new PermanentCardMeta(
+						  removalCost: null,
+						  fortification: false)))
 		{
-			BoardEffect = boardEffect;
-			BoardAbilities = boardAbilities?.ToList();
 		}
 
 		public override CardType Type => CardType.Hero;
-
-		public override int? PurchasePrice => null;
-
-		public override CardAction? BoardEffect { get; }
-
-		public override List<Ability>? BoardAbilities { get; }
-
-		public override int? MonsterPower => null;
-
-		public override CardAction? Bounty => null;
-
-		public override int? Defense => null;
-
-		public override bool? Permanent => true;
 
 		public override List<CardUpgrade> Upgrades => new List<CardUpgrade>();
 	}

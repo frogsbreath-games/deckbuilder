@@ -234,10 +234,6 @@ span.condition {
   display: grid;
 }
 
-.card-power > .resource {
-  transform: scale(1.5);
-}
-
-.card-price > .resource {
+.card-cost > .resource {
   transform: scale(1.5);
 }

@@ -9,21 +9,11 @@ interface CardProps<T extends CardStore.Card> {
   card: T;
 }
 
-type CountProps = {
-  count: number;
-}
-
 type AnyCardProps = CardProps<CardStore.Card>;
 
-const CardPrice = ({ count }: CountProps) => (
-  <div className="card-price">
-    <Resource.GoldResource count={count} />
-  </div>
-);
-
-const CardPower = ({ count }: CountProps) => (
-  <div className="card-power">
-    <Resource.DamageResource count={count} />
+const StoreCardCost = ({ card }: CardProps<CardStore.StoreCard>) => (
+  <div className="card-cost">
+    <Resource.ResourceList resources={card.store.cost} />
   </div>
 );
 
@@ -36,10 +26,9 @@ const CardHeader = ({ card }: AnyCardProps) => (
       {card.name}
     </div>
     <div className="right-icon-container">
-      {card.type === "monster" && <CardPower count={(card as CardStore.Monster).monsterPower} />}
-      {card.type === "spell" && <CardPrice count={(card as CardStore.Spell).purchasePrice} />}
-      {card.type === "fortification" && <CardPrice count={(card as CardStore.Fortification).purchasePrice} />}
-      {card.type === "outpost" && <CardPrice count={(card as CardStore.Outpost).purchasePrice} />}
+      {card.store && (
+        <StoreCardCost card={card as CardStore.StoreCard} />
+      )}
     </div>
   </div>
 );
@@ -50,23 +39,27 @@ const CardArt = ({ card }: AnyCardProps) => (
   </div>
 );
 
-const MonsterBounty = ({ card }: CardProps<CardStore.Monster>) => (
-  <div className="monster-bounty">
-    <CardAction action={card.bounty}/>
-  </div>
-);
-
-const PlayableCardBody = ({ card }: CardProps<CardStore.PlayableCard>) => (
+const StoreCardBody = ({ card }: CardProps<CardStore.StoreCard>) => (
   <React.Fragment>
-    {card.boardEffect !== undefined && (
-      <div className="board-effect">
-        <CardAction action={card.boardEffect} />
+    {card.store.bounty !== undefined && (
+      <div className="monster-bounty">
+        <CardAction action={card.store.bounty} />
       </div>
     )}
-    {card.boardAbilities !== undefined &&
-      card.boardAbilities.length > 0 && (
+  </React.Fragment>
+);
+
+const BoardCardBody = ({ card }: CardProps<CardStore.BoardCard>) => (
+  <React.Fragment>
+    {card.board.effect !== undefined && (
+      <div className="board-effect">
+        <CardAction action={card.board.effect} />
+      </div>
+    )}
+    {card.board.abilities !== undefined &&
+      card.board.abilities.length > 0 && (
       <div className="board-abilities">
-        {card.boardAbilities.map((a, i) => (
+        {card.board.abilities.map((a, i) => (
           <CardAbility key={i} ability={a}/>
         ))}
       </div>
@@ -76,18 +69,18 @@ const PlayableCardBody = ({ card }: CardProps<CardStore.PlayableCard>) => (
 
 const CardBody = ({ card }: AnyCardProps) => (
   <div className="game-card-body">
-    {card.type === "monster" && (
-      <MonsterBounty card={card as CardStore.Monster} />
+    {card.store && (
+      <StoreCardBody card={card as CardStore.StoreCard} />
     )}
-    {((card.type === "spell") || (card.type === "hero") || (card.type === "fortification") || (card.type === "outpost")) && (
-      <PlayableCardBody card={card as CardStore.PlayableCard}/>
+    {card.board && (
+      <BoardCardBody card={card as CardStore.BoardCard} />
     )}
   </div>
 );
 
 const CardDescription = ({ card }: AnyCardProps) => (
   <div className="game-card-description">
-    <div className="card-type-name">{card.keywords.join(' ') + ' ' + card.type}</div>
+    <div className="card-type-name">{Object.keys(card.keywords).join(' ') + ' ' + card.type}</div>
     <div className="card-id">{card.id}</div>
   </div>
 );

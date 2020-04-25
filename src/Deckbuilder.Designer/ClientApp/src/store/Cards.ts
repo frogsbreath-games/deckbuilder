@@ -10,12 +10,12 @@ export interface CardsState {
   cards: Card[];
 }
 
-export interface ResourceList {
-  gold?: number;
-  damage?: number;
-  glory?: number;
-  health?: number;
-}
+export type ResourceType =
+  'gold' | 'damage' | 'glory' | 'health';
+
+export type ResourceList = {
+  [type in ResourceType]?: number;
+};
 
 export interface BoardCondition {
   description: string;
@@ -78,11 +78,9 @@ export interface CardAbility {
   unlimited: boolean;
 }
 
-export type Keyword = 'angel'
-  | 'demon'
-  | 'soldier'
-  | 'vermin'
-  | 'wizard';
+export type KeywordList = {
+  [key: string]: true;
+};
 
 export type Faction = 'river'
   | 'mountain'
@@ -90,69 +88,119 @@ export type Faction = 'river'
   | 'desert'
   | 'jungle';
 
-interface BaseCard {
+export interface Card {
   id: number;
   name: string;
   code: string;
   version: number;
   form: string;
-  keywords: Keyword[];
+  keywords: KeywordList;
   faction?: Faction;
+  type: string;
+  store?: StoreCardMeta;
+  board?: BoardCardMeta;
 }
 
-export interface Hero extends BaseCard {
-  type: 'hero';
-  boardEffect?: CardAction;
-  boardAbilities?: CardAbility[];
-  permanent: true;
+export interface StoreCardMeta {
+  cost: ResourceList;
+  bounty?: CardAction;
+  acquire: boolean;
 }
 
-export interface Spell extends BaseCard {
-  type: 'spell';
-  boardEffect?: CardAction;
-  boardAbilities?: CardAbility[];
-  permanent: false;
-  purchasePrice: number;
+export interface BoardCardMeta {
+  effect?: CardAction;
+  abilities?: CardAbility[];
+  permanent?: PermanentCardMeta;
 }
 
-export interface Monster extends BaseCard {
-  type: 'monster';
-  monsterPower: number;
-  bounty: CardAction;
+export interface PermanentCardMeta {
+  removalCost?: ResourceList;
+  fortification: boolean;
 }
 
-export interface Fortification extends BaseCard {
-  type: 'fortification';
-  boardEffect?: CardAction;
-  boardAbilities?: CardAbility[];
-  permanent: true;
-  defense: number;
-  purchasePrice: number;
+export interface StoreCard extends Card {
+  store: StoreCardMeta;
 }
 
-export interface Outpost extends BaseCard {
-  type: 'outpost';
-  boardEffect?: CardAction;
-  boardAbilities?: CardAbility[];
-  permanent: true;
-  defense: number;
-  purchasePrice: number;
+export interface BoardCard extends Card {
+  board: BoardCardMeta;
 }
 
-export type DeckCard = Spell
-  | Fortification
-  | Outpost;
+export interface PermanentCard extends BoardCard {
+  board: BoardCardMeta & {
+    permanent: PermanentCardMeta;
+  }
+}
 
-export type PlayableCard = Hero
-  | Spell
-  | Fortification
-  | Outpost;
+export interface Hero extends PermanentCard {
+  store: undefined;
+  board: BoardCardMeta & {
+    permanent: PermanentCardMeta & {
+      removalCost: undefined;
+      fortification: false;
+    }
+  }
+}
 
-export type Card = Hero
-  | Spell
-  | Monster
-  | Fortification
-  | Outpost;
+export interface Spell extends BoardCard, StoreCard {
+  store: StoreCardMeta & {
+    cost: ResourceList & {
+      gold: number
+    }
+    bounty: undefined;
+    acquire: true;
+  }
+  board: BoardCardMeta & {
+    permanent: undefined;
+  }
+}
+
+export interface Monster extends StoreCard {
+  store: StoreCardMeta & {
+    cost: ResourceList & {
+      damage: number
+    }
+    bounty: CardAction;
+    acquire: false;
+  }
+  board: undefined;
+}
+
+export interface Fortification extends PermanentCard, StoreCard {
+  store: StoreCardMeta & {
+    cost: ResourceList & {
+      gold: number
+    }
+    bounty: undefined;
+    acquire: true;
+  }
+  board: BoardCardMeta & {
+    permanent: PermanentCardMeta & {
+      removalCost: ResourceList & {
+        damage: number
+      }
+      fortification: true;
+    }
+  }
+}
+
+export interface Outpost extends PermanentCard, StoreCard {
+  store: StoreCardMeta & {
+    cost: ResourceList & {
+      gold: number
+    }
+    bounty: undefined;
+    acquire: true;
+  }
+  board: BoardCardMeta & {
+    permanent: PermanentCardMeta & {
+      removalCost: ResourceList & {
+        damage: number
+      }
+      fortification: false;
+    }
+  }
+}
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Deckbuilder.Core.Builders;
 using Deckbuilder.Core.Enums;
 
 namespace Deckbuilder.Core.Models.CardTypes
@@ -14,27 +15,16 @@ namespace Deckbuilder.Core.Models.CardTypes
 			int monsterPower,
 			CardAction bounty,
 			IEnumerable<KeywordCode>? keywords = null)
-			: base(id, name, code, null, keywords)
+			: base(id, name, code, null, keywords,
+				  store: new StoreCardMeta(
+					  cost: Resources.Damage(monsterPower),
+					  bounty: bounty,
+					  acquire: false),
+				  board: null)
 		{
-			MonsterPower = monsterPower;
-			Bounty = bounty;
 		}
 
 		public override CardType Type => CardType.Monster;
-
-		public override int? PurchasePrice => null;
-
-		public override CardAction? BoardEffect => null;
-
-		public override List<Ability>? BoardAbilities => null;
-
-		public override int? MonsterPower { get; }
-
-		public override CardAction? Bounty { get; }
-
-		public override int? Defense => null;
-
-		public override bool? Permanent => null;
 
 		public override List<CardUpgrade>? Upgrades => null;
 	}

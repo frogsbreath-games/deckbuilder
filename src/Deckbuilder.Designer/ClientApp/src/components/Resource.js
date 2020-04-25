@@ -17,7 +17,7 @@ exports.HealthResource = function (_a) {
     var count = _a.count;
     return React.createElement("span", { className: "resource health" }, count);
 };
-var ResourceList = function (_a) {
+exports.ResourceList = function (_a) {
     var resources = _a.resources;
     return (React.createElement(React.Fragment, null,
         resources.gold && React.createElement(exports.GoldResource, { count: resources.gold }),
@@ -25,5 +25,5 @@ var ResourceList = function (_a) {
         resources.health && React.createElement(exports.HealthResource, { count: resources.health }),
         resources.glory && React.createElement(exports.GloryResource, { count: resources.glory })));
 };
-exports.default = ResourceList;
+exports.default = exports.ResourceList;
 //# sourceMappingURL=Resource.js.map
