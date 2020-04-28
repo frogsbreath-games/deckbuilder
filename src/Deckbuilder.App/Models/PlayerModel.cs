@@ -13,6 +13,7 @@ namespace Deckbuilder.App.Models
 			HandModel hand,
 			DeckModel deck,
 			DiscardModel discard,
+			BoardObjectModel hero,
 			IEnumerable<BoardObjectModel>? boardObjects = null)
 		{
 			Number = number;
@@ -20,6 +21,7 @@ namespace Deckbuilder.App.Models
 			Hand = hand;
 			Deck = deck;
 			Discard = discard;
+			Hero = hero;
 			BoardObjects = boardObjects?.ToList() ?? new List<BoardObjectModel>();
 		}
 
@@ -28,6 +30,7 @@ namespace Deckbuilder.App.Models
 		public HandModel Hand { get; }
 		public DeckModel Deck { get; }
 		public DiscardModel Discard { get; }
+		public BoardObjectModel Hero { get; }
 		public List<BoardObjectModel> BoardObjects { get; }
 	}
 }
