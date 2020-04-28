@@ -1,9 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router";
-import { Link } from "react-router-dom";
 import { ApplicationState } from "../store";
 import * as GameStore from "../store/Game";
+import styles from "./Game.module.css";
 
 // At runtime, Redux will merge together...
 type GameProps = GameStore.GameState & // ... state we've requested from the Redux store
@@ -16,7 +15,15 @@ class FetchData extends React.PureComponent<GameProps> {
   }
 
   public render() {
-    return <React.Fragment></React.Fragment>;
+    return (
+      <React.Fragment>
+        <div className={styles.board}>
+          <div>Opponent Section</div>
+          <div>Neutral Section</div>
+          <div className={styles.playerSection}>Player Section</div>
+        </div>
+      </React.Fragment>
+    );
   }
 
   private fetchBoard() {
