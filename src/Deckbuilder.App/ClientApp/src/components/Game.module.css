@@ -1,10 +1,80 @@
 .board {
   display: grid;
-  grid-template-rows: repeat(3);
+  grid-template-rows: 2fr 1fr 2fr;
+  height: calc(100vh - 75px);
 }
 
 .playerSection {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "permanentArea playArea playArea counterArea"
+    "heroArea handArea handArea deckArea";
+}
+
+.opponentSection {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "heroArea handArea handArea deckArea"
+    "permanentArea playArea playArea counterArea";
+}
+
+.neutralSection {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "storeArea storeArea storeArea storeArea utilityArea";
+}
+
+.storeArea {
+  grid-area: storeArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.utilityArea {
+  grid-area: utilityArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+
+.permanentArea {
+  grid-area: permanentArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.playArea {
+  grid-area: playArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.counterArea {
+  grid-area: counterArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.heroArea {
+  grid-area: heroArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.handArea {
+  grid-area: handArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+}
+.deckArea {
+  grid-area: deckArea;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
 }
