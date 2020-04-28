@@ -34,6 +34,10 @@
   border-color: black;
   border-style: solid;
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
 }
 .utilityArea {
   grid-area: utilityArea;
@@ -77,4 +81,14 @@
   border-color: black;
   border-style: solid;
   text-align: center;
+}
+
+.card {
+  background-color: grey;
+  height: 119px;
+  width: 85px;
+  text-align: left;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /*, 0 0 6px -2px rgba(0,0,0,0.6);*/
 }

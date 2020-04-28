@@ -27,7 +27,14 @@ class FetchData extends React.PureComponent<GameProps> {
             <div className={styles.counterArea}>Counter Area</div>
           </div>
           <div className={styles.neutralSection}>
-            <div className={styles.storeArea}>Store Area</div>
+            <div className={styles.storeArea}>
+              {this.props.boardState.storeObjects &&
+                this.props.boardState.storeObjects.map(
+                  (boardObject: GameStore.BoardObject) => (
+                    <div className={styles.card}>{boardObject.card.number}</div>
+                  )
+                )}
+            </div>
             <div className={styles.utilityArea}>Utility Area</div>
           </div>
           <div className={styles.playerSection}>

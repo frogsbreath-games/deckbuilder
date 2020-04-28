@@ -11,8 +11,18 @@ export interface GameState {
 
 export interface BoardState {
   storeDeck?: any;
-  storeObjects?: any;
+  storeObjects?: BoardObject[];
   players?: any;
+}
+
+export interface Card {
+  number: number;
+}
+
+export interface BoardObject {
+  card: Card;
+  status: string;
+  counters: [];
 }
 
 // -----------------
