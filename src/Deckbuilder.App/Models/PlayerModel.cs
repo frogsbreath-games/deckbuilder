@@ -14,7 +14,8 @@ namespace Deckbuilder.App.Models
 			DeckModel deck,
 			DiscardModel discard,
 			BoardObjectModel hero,
-			IEnumerable<BoardObjectModel>? boardObjects = null)
+			IEnumerable<BoardObjectModel>? boardObjects = null,
+			Dictionary<string, int>? counters = null)
 		{
 			Number = number;
 			Name = name;
@@ -23,6 +24,7 @@ namespace Deckbuilder.App.Models
 			Discard = discard;
 			Hero = hero;
 			BoardObjects = boardObjects?.ToList() ?? new List<BoardObjectModel>();
+			Counters = counters ?? new Dictionary<string, int>();
 		}
 
 		public int Number { get; }
@@ -32,5 +34,6 @@ namespace Deckbuilder.App.Models
 		public DiscardModel Discard { get; }
 		public BoardObjectModel Hero { get; }
 		public List<BoardObjectModel> BoardObjects { get; }
+		public Dictionary<string, int> Counters { get; }
 	}
 }
