@@ -25,6 +25,42 @@ export interface BoardObject {
   counters: [];
 }
 
+export interface Player {
+  name: string;
+  number: number;
+  deck: Deck;
+  discard: Discard;
+  hand: Hand;
+  hero: Hero;
+}
+
+export interface Deck {
+  cards: Card[];
+  counter: number;
+  name: string;
+  visible: boolean;
+}
+
+export interface Discard {
+  cards: Card[];
+  counter: number;
+  name: string;
+  visible: boolean;
+}
+
+export interface Hand {
+  cards: Card[];
+  counter: number;
+  name: string;
+  visible: boolean;
+}
+
+export interface Hero {
+  card: Card;
+  counters: [];
+  status: string;
+}
+
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
@@ -57,7 +93,6 @@ export const actionCreators = {
     fetch(`board/random`)
       .then((response) => response.json() as Promise<BoardState>)
       .then((data) => {
-        console.log(data);
         dispatch({
           type: "RECIEVE_BOARD_STATE",
           boardState: data,
@@ -94,6 +129,7 @@ export const reducer: Reducer<GameState> = (
         isLoading: true,
       };
     case "RECIEVE_BOARD_STATE":
+      console.log(action.boardState);
       return {
         boardState: action.boardState,
         isLoading: false,

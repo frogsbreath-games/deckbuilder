@@ -31,7 +31,9 @@ class FetchData extends React.PureComponent<GameProps> {
               {this.props.boardState.storeObjects &&
                 this.props.boardState.storeObjects.map(
                   (boardObject: GameStore.BoardObject) => (
-                    <div className={styles.card}>{boardObject.card.number}</div>
+                    <div className={styles.card} key={boardObject.card.number}>
+                      {boardObject.card.number}
+                    </div>
                   )
                 )}
             </div>
