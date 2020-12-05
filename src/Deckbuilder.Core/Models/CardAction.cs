@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Deckbuilder.Core.Enums;
+﻿using Deckbuilder.Core.Enums;
 using Deckbuilder.Core.Extensions;
 using Deckbuilder.Core.Models.ActionTypes;
-using Newtonsoft.Json;
 
 namespace Deckbuilder.Core.Models
 {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Deckbuilder.App.Models
 {
@@ -42,7 +40,7 @@ namespace Deckbuilder.App.Models
 		{
 			var ret = new List<CardModel>();
 
-			for(int i = 0; i < count; i++)
+			for (int i = 0; i < count; i++)
 			{
 				var card = Draw();
 

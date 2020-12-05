@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Deckbuilder.Core.Extensions;
+﻿using Deckbuilder.Core.Extensions;
 
 namespace Deckbuilder.Core.Models
 {
@@ -14,6 +11,7 @@ namespace Deckbuilder.Core.Models
 			Action = action;
 			Unlimited = unlimited;
 		}
+
 		public BoardCondition? Condition { get; }
 		public ResourceList? Cost { get; }
 		public CardAction Action { get; }

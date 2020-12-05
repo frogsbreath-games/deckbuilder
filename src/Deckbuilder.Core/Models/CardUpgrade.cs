@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Deckbuilder.Core.Models
+﻿namespace Deckbuilder.Core.Models
 {
 	public class CardUpgrade
 	{

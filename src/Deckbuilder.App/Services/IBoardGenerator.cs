@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Deckbuilder.App.Models;
 using Deckbuilder.Core.Extensions;
 
@@ -28,7 +26,7 @@ namespace Deckbuilder.App.Services
 				.ToList();
 
 			var random = _rand.Random;
-			
+
 			cards.Shuffle(random);
 
 			var storeDeck = new DeckModel("StoreDeck", cards);

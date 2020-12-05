@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Deckbuilder.Core.Builders;
 using Deckbuilder.Core.Enums;
 

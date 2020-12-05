@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Deckbuilder.Core.Enums
+﻿namespace Deckbuilder.Core.Enums
 {
 	public enum EventType
 	{

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Deckbuilder.Core.Models;
+﻿using Deckbuilder.Core.Models;
 
 namespace Deckbuilder.Core.Builders
 {

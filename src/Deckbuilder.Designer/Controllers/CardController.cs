@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Deckbuilder.Core.Builders;
 using Deckbuilder.Core.Enums;
-using Deckbuilder.Core.Extensions;
 using Deckbuilder.Core.Models;
-using Deckbuilder.Core.Models.ActionTypes;
-using Deckbuilder.Core.Models.CardTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -89,7 +85,7 @@ namespace Deckbuilder.Designer.Controllers
 					& Actions.Conditional(
 						@if: Conditions.FactionCount(FactionCode.Mountain, 2),
 						then: Actions.GainDamage(1)),
-				abilities: new []
+				abilities: new[]
 				{
 					Abilities.OncePerTurn(
 						pay: Resources.Glory(2),

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Deckbuilder.App.Models
 {
@@ -11,6 +8,7 @@ namespace Deckbuilder.App.Models
 		bool Visible { get; }
 		int Count { get; }
 		List<CardModel> Cards { get; }
+
 		void Add(CardModel card);
 	}
 }

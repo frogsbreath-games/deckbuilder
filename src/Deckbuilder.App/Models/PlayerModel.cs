@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Deckbuilder.App.Models
 {
@@ -28,7 +26,7 @@ namespace Deckbuilder.App.Models
 		}
 
 		public int Number { get; }
-		public string Name { get; }		
+		public string Name { get; }
 		public HandModel Hand { get; }
 		public DeckModel Deck { get; }
 		public DiscardModel Discard { get; }

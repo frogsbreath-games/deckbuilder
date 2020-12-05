@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Deckbuilder.Core.Models;
 using Deckbuilder.Core.Models.ActionTypes;
 
