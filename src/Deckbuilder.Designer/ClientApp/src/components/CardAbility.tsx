@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
-import * as CardStore from "../store/Cards";
-import CardAction from "./CardAction";
-import ResourceList from "./Resource";
+import * as CardStore from "@store/Cards";
+import CardAction from "@components/CardAction";
+import ResourceList from "@components/Resource";
 
 type AbilityProps = {
   ability: CardStore.CardAbility;

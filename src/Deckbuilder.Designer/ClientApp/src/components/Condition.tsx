@@ -1,5 +1,5 @@
 ﻿import * as React from "react";
-import * as CardStore from "../store/Cards";
+import * as CardStore from "@store/Cards";
 
 type ConditionProps = {
   condition: CardStore.BoardCondition;

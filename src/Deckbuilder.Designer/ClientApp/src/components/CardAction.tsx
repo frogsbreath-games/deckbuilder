@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
-import * as CardStore from "../store/Cards";
-import ResourceList from "./Resource";
-import Condition from "./Condition";
+import * as CardStore from "@store/Cards";
+import ResourceList from "@components/Resource";
+import Condition from "@components/Condition";
 
 interface ActionProps<T extends CardStore.CardAction> {
   action: T;

@@ -1,9 +1,9 @@
 ﻿import * as React from "react";
-import * as CardStore from "../store/Cards";
-import FactionIcon from "./Faction";
-import CardAbility from "./CardAbility";
-import CardAction from "./CardAction";
-import * as Resource from "./Resource";
+import * as CardStore from "@store/Cards";
+import FactionIcon from "@components/Faction";
+import CardAbility from "@components/CardAbility";
+import CardAction from "@components/CardAction";
+import * as Resource from "@components/Resource";
 
 interface CardProps<T extends CardStore.Card> {
   card: T;

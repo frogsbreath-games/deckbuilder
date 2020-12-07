@@ -1,10 +1,9 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Link } from 'react-router-dom';
-import { ApplicationState } from '../store';
-import * as CardsStore from '../store/Cards';
-import Card from './Card';
+import { ApplicationState } from '@store/index';
+import * as CardsStore from '@store/Cards';
+import Card from '@components/Card';
 
 // At runtime, Redux will merge together...
 type CardProps =
